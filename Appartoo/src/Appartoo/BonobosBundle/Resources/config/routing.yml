@@ -1,0 +1,23 @@
+appartoo_bonobos_homepage:
+    path:     /
+    defaults: { _controller: AppartooBonobosBundle:Default:index }
+
+
+appartoo_bonobos_friends:
+  path:       /friends
+  defaults:
+    _controller:  AppartooBonobosBundle:Friends:index
+
+
+appartoo_bonobos_addfriend:
+    path:     /friends/add
+    defaults:
+      _controller: AppartooBonobosBundle:Friends:add
+
+
+appartoo_bonobos_delfriend:
+    path:     /friends/del/{id}
+    defaults:
+      _controller: AppartooBonobosBundle:Friends:del
+    requirements:
+      id: \d+

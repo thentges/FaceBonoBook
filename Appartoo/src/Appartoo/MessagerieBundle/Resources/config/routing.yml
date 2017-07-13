@@ -1,0 +1,9 @@
+appartoo_messagerie_send:
+  path: /send/{id}
+  defaults: { _controller: AppartooMessagerieBundle:Conversation:sendMsg }
+  requirements:
+    id:   \d+
+
+appartoo_messagerie:
+  path: /messagerie
+  defaults: { _controller: AppartooMessagerieBundle:Conversation:list }

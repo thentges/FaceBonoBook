@@ -1,0 +1,19 @@
+{% extends "AppartooBonobosBundle:Default:index.html.twig" %}
+
+
+{% block body %}
+{% block leftside %}
+<center>
+  {% for key, messages in app.session.flashbag.all() %}  {# messages flash #}
+    {% for message in messages %}
+      <div class="alert alert-{{ key }}">
+        {{ message|trans({}, 'FOSUserBundle') }}
+      </div>
+</center>
+    {% endfor %}
+  {% endfor %}
+{% endblock %}
+  {% block fos_user_content %}
+  {% endblock fos_user_content %}
+
+{% endblock %}

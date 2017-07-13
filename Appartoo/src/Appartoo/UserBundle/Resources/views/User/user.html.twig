@@ -1,0 +1,56 @@
+{% extends "AppartooBonobosBundle:Default:index.html.twig" %}
+
+{% block title %} {{user.username}} {% endblock %}
+
+{% block leftside %}
+<center>
+<div class="bg-success">
+{% for message in app.session.flashbag.get('success') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+<div class="bg-danger">
+{% for message in app.session.flashbag.get('error') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+</center>
+
+  <h2>{{user.username}}<br>
+  </h2>
+
+  <br>
+  <div class=well>
+    <h4>Adresse e-mail : <small>{{user.email}}</small></h4>
+    {% if user.birthday is not null %}
+      <h4>Date de naissance : <small>{{user.birthday|date('d/m/Y')}}</small></h4>
+    {% endif %}
+    {% if user.famille is not null %}
+      <h4>Famille : <small>{{user.famille}}</small></h4>
+    {% endif %}
+    {% if user.race is not null %}
+      <h4>Race : <small>{{user.race}}</small></h4>
+    {% endif %}
+    {% if user.nourriture is not null %}
+      <h4>Nourriture : <small>{{user.nourriture}}</small></h4>
+    {% endif %}
+
+  </div>
+
+  {% if user.username == app.user.username %} {# s'il s'agit de son profil #}
+    <a href="{{ path('appartoo_user_modif') }}" class="btn btn-success">Modifier mes informations</a>
+  {% endif %}
+
+
+{% endblock %}
+
+{% block rightside %}
+<center>
+  <ul class=list-unstyled>
+    <li class="well">Connecté en tant que <b>{{ app.user.username }}</b></li>
+    <li><a href="{{path('appartoo_bonobos_friends')}}" class="btn btn-primary">Liste d'amis</a></li><br>
+    <li><a href="{{path('appartoo_bonobos_homepage')}}" class="btn btn-primary">Retour à l'accueil</a></li><br>
+    <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Déconnexion</a></li>
+  </ul>
+</center>
+{% endblock %}

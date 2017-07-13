@@ -1,0 +1,36 @@
+{% extends "AppartooBonobosBundle:Default:index.html.twig" %}
+{% block title %}Modifier mes informations{% endblock %}
+{% block leftside %}
+<center>
+<div class="bg-success">
+{% for message in app.session.flashbag.get('success') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+<div class="bg-danger">
+{% for message in app.session.flashbag.get('error') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+</center>
+{{ form_start(form) }}
+{{ form_errors(form) }}
+{{ form_row(form.birthday) }}
+{{ form_row(form.famille) }}
+{{ form_row(form.race) }}
+{{ form_row(form.nourriture) }}
+{{ form_widget(form.add, {'attr': {'class': "btn btn-success"}}) }}</li>
+{{ form_rest(form) }}
+{{ form_end(form) }}
+{% endblock %}
+
+{% block rightside %}
+<center>
+  <ul class=list-unstyled>
+    <li class="well">Connecté en tant que <b>{{ app.user.username }}</b></li>
+    <li><a href="{{path('appartoo_user_profil' , {'username' : app.user.username})}}" class="btn btn-primary">Mon profil</a></li><br>
+    <li><a href="{{path('appartoo_bonobos_homepage')}}" class="btn btn-primary">Retour à l'accueil</a></li><br>
+    <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Déconnexion</a></li>
+  </ul>
+</center>
+{% endblock %}

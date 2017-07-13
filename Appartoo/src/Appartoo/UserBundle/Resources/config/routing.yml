@@ -1,0 +1,14 @@
+appartoo_user:
+    path:     /user/{username}
+    defaults:
+      _controller: AppartooUserBundle:User:user
+
+appartoo_user_profil:
+  path:        /user/{username}
+  defaults:
+    _controller:  AppartooUserBundle:User:profil
+
+appartoo_user_modif:
+  path:     /modif
+  defaults:
+    _controller: AppartooUserBundle:User:modif

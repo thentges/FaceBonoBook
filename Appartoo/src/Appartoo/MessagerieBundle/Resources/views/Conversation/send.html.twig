@@ -1,0 +1,44 @@
+{% extends "AppartooBonobosBundle:Default:index.html.twig" %}
+
+{% block title %}Envoyer un message{% endblock %}
+{% block leftside %}
+<center>
+<div class="bg-success">
+{% for message in app.session.flashbag.get('success') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+<div class="bg-danger">
+{% for message in app.session.flashbag.get('error') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+</center>
+  <h2>Envoyer un message à {{friend.username}}</h2>
+  <p>
+    <div class="well">
+      {{ form_start(form) }}
+      {{ form_errors(form) }}
+      {{ form_row(form.title) }}
+      {{ form_row(form.message) }}
+    </div>
+  </p>
+  <p>
+    <ul class=list-inline>
+      <li>{{ form_widget(form.add, {'attr': {'class': "btn btn-success"}}) }}</li>
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
+    </ul>
+  </p>
+
+{% endblock %}
+{% block rightside %}
+<center>
+  <ul class=list-unstyled>
+    <li class="well">Connecté en tant que <b>{{ app.user.username }}</b></li>
+    <li><a href="{{path('appartoo_bonobos_friends')}}" class="btn btn-primary">Liste d'amis</a></li><br>
+    <li><a href="{{path('appartoo_bonobos_homepage')}}" class="btn btn-primary">Retour à l'accueil</a></li><br>
+    <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Déconnexion</a></li>
+  </ul>
+</center>
+{% endblock %}

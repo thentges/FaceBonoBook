@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Accueil{% endblock %} - FaceBonoBook</title>
+
+  {% block stylesheets %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  {% endblock %}
+</head>
+
+<body>
+
+  <div id="header" class="jumbotron">
+    <h1 class=text-center><a href="{{path('appartoo_bonobos_homepage')}}">FaceBonoBook</a></h1>
+    <p class=text-center>
+      <i>Carnet d'adresse pour Bonobos</i>
+    </p>
+  </div>
+  {% block body %}
+  {% block center %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% else %}
+    <center>
+      <p>
+        <ul class=list-inline>
+          <li><a href="{{path('fos_user_security_login')}}" class="btn btn-primary">Connexion</a></li>
+          <li><a href="{{path('fos_user_registration_register')}}" class="btn btn-primary">Inscription</a></li>
+        </ul>
+      </p>
+      <p><br>
+        <img src="../images/image_accueil.png" alt="logo FaceBonoBook" width=30%></img>
+      </p>
+    </center>
+    {% endif %}
+  {% endblock %}
+
+  <div class="container">
+      <div id="content" class="col-md-9">
+        {% block leftside %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <h2> Bienvenue {{ app.user.username }}</h2>
+        <br>
+        <ul class=list-inline>
+          <br>
+          <li><a href="{{path('appartoo_user_profil' , {'username' : app.user.username})}}" class="btn btn-info btn-lg">Votre profil</a></li>
+          <li><a href="{{path('appartoo_bonobos_friends')}}" class="btn btn-info btn-lg">Liste d'amis</a></li>
+          <li><a href="{{path('appartoo_bonobos_addfriend')}}" class="btn btn-info btn-lg">Ajouter un ami</a></li>
+          <li><a href="{{path('appartoo_messagerie')}}" class="btn btn-info btn-lg">Messagerie</a></li>
+        </ul>
+        {% endif %}
+        {% endblock %}
+      </div>
+
+      <div class="col-md-3">
+        <p>
+          {% block rightside %}
+          <center>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <img src="../images/image_accueil.png" alt="logo FaceBonoBook" width=50%></img><br>
+            <br>
+              <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Déconnexion</a>
+          {% endif %}
+
+          </center>
+        </p>
+          {% endblock %}
+  {% endblock %}
+
+      </div>
+
+    </div>
+
+    <hr>
+
+    <footer>
+      <p class=text-center>FaceBonoBook par Thibault HENTGÈS - using Symfony3 and Bootstrap</p>
+    </footer>
+  </div>
+
+</body>
+</html>

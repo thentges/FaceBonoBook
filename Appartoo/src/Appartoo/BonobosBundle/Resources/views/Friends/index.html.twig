@@ -1,0 +1,50 @@
+{% extends "AppartooBonobosBundle:Default:index.html.twig" %}
+
+{% block title %} Liste d'amis {% endblock %}
+
+{% block leftside %}
+<center>
+<div class="bg-success">
+{% for message in app.session.flashbag.get('success') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+<div class="bg-danger">
+{% for message in app.session.flashbag.get('error') %}
+     <p>{{ message }}</p>
+   {% endfor %}
+</div>
+</center>
+
+  <h2> Liste d'amis</h2>
+
+  <div> <h3 class=bg-primary>Tous les amis</h3>
+    <ul class=list-unstyled>
+    {% for friend in app.user.friends %}
+      <li><h4>
+        <a href="{{ path('appartoo_bonobos_delfriend' , {'id' : friend.id }) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+        <a href="{{ path('appartoo_user' , {'username' : friend.username }) }}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i></a>
+        <a href="{{ path('appartoo_messagerie_send' , {'id' : friend.id }) }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-comment"></i></a>
+        {{friend.username}} <br>
+      </h4>
+      </li>
+
+    {% else %}
+        Vous n'avez pas encore d'ami :(
+    {% endfor %}
+    </ul>
+    <br>
+  </div>
+
+{% endblock %}
+
+{% block rightside %}
+<center>
+  <ul class=list-unstyled>
+    <li class="well">Connecté en tant que <b>{{ app.user.username }}</b></li>
+    <li><a href="{{path('appartoo_bonobos_addfriend')}}" class="btn btn-primary">Ajouter un ami</a></li><br>
+    <li><a href="{{path('appartoo_bonobos_homepage')}}" class="btn btn-primary">Retour à l'accueil</a></li><br>
+    <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Déconnexion</a></li>
+  </ul>
+</center>
+{% endblock %}
