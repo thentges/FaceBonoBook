@@ -12,3 +12,8 @@ appartoo_user_modif:
   path:     /modif
   defaults:
     _controller: AppartooUserBundle:User:modif
+
+appartoo_users:
+  path:   /users
+  defaults:
+    _controller: AppartooUserBundle:User:getUsers

@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
@@ -65,6 +68,28 @@ class UserController extends Controller
       return $this->render('AppartooUserBundle:User:modif.html.twig', array('form' => $form->createView() , 'user' => $user));
     }
 
+    /**
+         * @Route("/users", name="users_list")
+         * @Method({"GET"})
+         */
+    public function getUsersAction(Request $request)
+        {
+            $users = $this->getDoctrine()->getManager()
+                    ->getRepository('AppartooUserBundle:User')
+                    ->findBy(array(), array('username' => 'asc'));
+
+            $formatted = [];
+            foreach ($users as $user) {
+
+                $formatted[] = [
+                   'id' => $user->getId(),
+                   'username' => $user->getUsername(),
+                   'email' => $user->getEmail(),
+                ];
+            }
+
+            return new JsonResponse($formatted);
+        }
 
 
 }

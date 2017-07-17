@@ -6,6 +6,7 @@
 
   <title>{% block title %}Accueil{% endblock %} - FaceBonoBook</title>
 
+
   {% block stylesheets %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   {% endblock %}
@@ -79,6 +80,16 @@
       <p class=text-center>FaceBonoBook par Thibault HENTGÈS - using Symfony3 and Bootstrap</p>
     </footer>
   </div>
+
+  {% javascripts
+  '@AppartooBonobosBundle/Resources/public/js/angular.min.js'
+  '@AppartooBonobosBundle/Resources/public/js/recherche.js'
+  '@AppartooBonobosBundle/Resources/public/js/showdiv.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 
 </body>
 </html>

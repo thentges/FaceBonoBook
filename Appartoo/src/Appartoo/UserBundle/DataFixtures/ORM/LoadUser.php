@@ -9,18 +9,20 @@ class LoadUser implements FixtureInterface
 {
   public function load(ObjectManager $manager)
   {
-    $listUsernames = array('Thibonobo', 'Bonobob');
+    $listUsernames = array('Thibonobo', 'Bonobob' , 'Louistiti' , 'Alain' , 'Thibault' );
 
     foreach ($listUsernames as $username) {
       $user = new User;
       $user->setUsername($username);
-      $user->setPassword($username);
+      $user->setEmail($username."@gmail.com");
+      $user->setEnabled(true);
+      $user->setPlainPassword($username);
       $user->setSalt('');
       $user->setRoles(array('ROLE_USER'));
       $user->setNourriture('Omnivore');
       $user->setBirthday(new \Datetime());
-      $user->setRace('Singe');
-      $user->setFamille('Famille';)
+      $user->setRace('Race');
+      $user->setFamille('Famille');
       $manager->persist($user);
     }
 

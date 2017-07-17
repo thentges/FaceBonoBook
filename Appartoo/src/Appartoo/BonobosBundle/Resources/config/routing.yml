@@ -21,3 +21,10 @@ appartoo_bonobos_delfriend:
       _controller: AppartooBonobosBundle:Friends:del
     requirements:
       id: \d+
+
+appartoo_bonobos_add:
+    path: /friends/add-{id}
+    defaults:
+      _controller: AppartooBonobosBundle:Friends:addd
+    requirements:
+      id: \d+

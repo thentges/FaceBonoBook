@@ -1,8 +1,9 @@
 {% extends "AppartooBonobosBundle:Default:index.html.twig" %}
 
+
+
 {% block title %}Ajouter un ami{% endblock %}
 {% block leftside %}
-<center>
   <center>
   <div class="bg-success">
   {% for message in app.session.flashbag.get('success') %}
@@ -15,19 +16,24 @@
      {% endfor %}
   </div>
   </center>
+  <center>
   <h2>Ajouter un ami</h2>
-  <p>
-    <div class="well">
-      {{ form_start(form) }}
-      {{ form_errors(form) }}
-      {{ form_row(form.username) }}
-    </div>
-  </p>
-  <p>
-    {{ form_widget(form.add, {'attr': {'class': "btn btn-success"}}) }}</li>
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-  </p>
+    </center>
+  <div ng-app="recherche" ng-controller="rechercheCtrl">
+    <p class=well>
+      <input type=text style="width:100%; text-align:center;" ng-model="filtre" placeholder="Entrez un nom d'utilisateur ou un e-mail pour filtrer la liste"></input>
+    </p>
+    <ul class="list-unstyled">
+      <li ng-repeat="user in liste | filter: filtre">
+        <br><a href="add-{% verbatim %}{{user.id}}{% endverbatim %}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i> add friend</a>
+        <a href="../user/{% verbatim %}{{user.username}}{% endverbatim %}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i></a>
+        <b>{% verbatim %}{{user.username}}{% endverbatim %}</b> - <i>{% verbatim %}{{user.email}} {% endverbatim %}</i>
+      </li>
+    </ul>
+  </div>
+
+
+
 
 {% endblock %}
 

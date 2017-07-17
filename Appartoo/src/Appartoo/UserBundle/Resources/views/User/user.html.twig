@@ -39,8 +39,26 @@
 
   {% if user.username == app.user.username %} {# s'il s'agit de son profil #}
     <a href="{{ path('appartoo_user_modif') }}" class="btn btn-success">Modifier mes informations</a>
-  {% endif %}
+  {% elseif user.username not in app.user.friends %} {# si ils ne sont pas amis #}
+    <a href="{{ path('appartoo_bonobos_add' , {'id' : user.id}) }}" class="btn btn-success">Ajouter comme ami</a>
+  {% else %} {# s'ils sont amis #}
+  <div ng-app="show" ng-controller="showCtrl">
+    <button ng-click="modif()" class="btn btn-primary">Voir les amis</button>
+    <a href="{{ path('appartoo_messagerie_send' , {'id' : user.id }) }}" class="btn btn-success"><i class="glyphicon glyphicon-comment"></i> Envoyer un message</a>
+    <div ng-show="show"><br>
+      {% for friend in user.friends %}
+      <ul class="list-unstyled">
+        <li>
+          <a href="{{path('appartoo_bonobos_add' , {id : friend.id})}}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i> add friend</a>
+          <a href="{{path('appartoo_user_profil' , {username : friend.username})}}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i></a>
+          {{friend.username}}
+        </li>
+      </ul>
+      {% endfor %}
 
+    </div>
+  </div>
+  {% endif %}
 
 {% endblock %}
 
